@@ -87,7 +87,11 @@ class CheckSession(Resource):
 class MemberOnlyIndex(Resource):
     
     def get(self):
-        pass
+        member_only = Article.query.filter(Article.is_member_only==True).all()
+        article_data = [article.to_dict() for article in member_only]
+
+        return article_data, 200
+    
 
 class MemberOnlyArticle(Resource):
     
